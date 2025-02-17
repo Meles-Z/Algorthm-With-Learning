@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
-	"io/ioutil"
+	"bufio"
 	"log"
+	"os"
 )
 
 func main() {
@@ -36,11 +36,26 @@ func main() {
 	// }
 	// fmt.Println("Done writting into file")
 
-	fileName:="test.txt"
-	data:="Hi everyone! What about your work!"
-	 err:=ioutil.WriteFile(fileName, []byte(data), 0 )
-	 if err !=nil{
-        log.Fatal(err)
-     }
-	 fmt.Println("Done!")
+	// fileName:="test.txt"
+	// data:="Hi everyone! What about your work!"
+	//  err:=ioutil.WriteFile(fileName, []byte(data), 0 )
+	//  if err !=nil{
+	//     log.Fatal(err)
+	//  }
+	//  fmt.Println("Done!")
+	// fileName:="test.txt"
+	// file, err:=ioutil.ReadFile(fileName)
+	// if err !=nil{
+	// 	log.Fatal(err)
+	// }
+	// fmt.Println(string(file))
+
+	fileName := "test.txt"
+	file, err := os.OpenFile(fileName, os.O_CREATE| os.O_WRONLY, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+	scanner := bufio.NewWriter(file)
+	scanner.Write([]byte("Hi there! I love you very much all of you and then everthing is fine."))
+	scanner.Flush()
 }
