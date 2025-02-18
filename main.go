@@ -1,7 +1,8 @@
 package main
 
 import (
-	"bufio"
+	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
 )
@@ -50,12 +51,16 @@ func main() {
 	// }
 	// fmt.Println(string(file))
 
-	fileName := "test.txt"
-	file, err := os.OpenFile(fileName, os.O_CREATE| os.O_WRONLY, 0644)
+	file, err := os.Open("test.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
-	scanner := bufio.NewWriter(file)
-	scanner.Write([]byte("Hi there! I love you very much all of you and then everthing is fine."))
-	scanner.Flush()
+	defer file.Close()
+
+	content, err := ioutil.ReadFile("test.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%s",content)
+
 }
