@@ -1,0 +1,52 @@
+apiVersion: apps/v1 # Specifies the API version for the Deployment resource.  apps/v1 is the standard version for Deployments.
+kind: Deployment # Declares the resource type as a Deployment.  Kubernetes knows this is a Deployment definition.
+metadata: # Metadata about the Deployment.
+  name: my-app-deployment # The name of the Deployment.  Should be unique within the namespace.
+  labels: # Labels for the Deployment itself (good for organization).
+    app: my-app # Label indicating the application this Deployment is for.
+    environment: production # Label indicating the environment (production, staging, etc.).
+spec: # Specification of the desired state of the Deployment.
+  replicas: 3 # The desired number of Pod replicas.  Kubernetes will try to maintain this number.
+  selector: # How the Deployment identifies the Pods it manages.
+    matchLabels: # Uses labels to select Pods.
+      app: my-app # Matches Pods with the label "app: my-app".  This is how the Deployment is linked to the Pods it creates.
+  template: # A template for creating Pods.  This is the blueprint for the Pods the Deployment will manage.
+    metadata: # Metadata for the Pods.
+      labels: # Labels applied to the Pods.  These are the labels the selector above matches.
+        app: my-app # Label indicating the application the Pod belongs to.
+    spec: # Specification of the Pod.
+      containers: # List of containers in the Pod.
+      - name: my-app-container # Name of the container.
+        image: your-registry/your-app:latest # The Docker image to use for the container.  Replace with your actual image.
+        ports: # Ports exposed by the container.
+        - containerPort: 8080 # The port the container is listening on.
+        resources: # Resource requests and limits for the container.  Important for resource management.
+          requests: # Minimum resources the container needs.
+            cpu: "100m" # 100 millicores of CPU.
+            memory: "256Mi" # 256 Megabytes of memory.
+          limits: # Maximum resources the container can use.
+            cpu: "500m" # 500 millicores of CPU.
+            memory: "512Mi" # 512 Megabytes of memory.
+        livenessProbe: # Health check to determine if the container is alive.
+          httpGet: # Uses an HTTP GET request.
+            path: / # The path to check (e.g., a health check endpoint).
+            port: 8080 # The port to check.
+          initialDelaySeconds: 5 # Wait 5 seconds after the container starts before checking.
+          periodSeconds: 10 # Check every 10 seconds.
+        readinessProbe: # Health check to determine if the container is ready to serve traffic.
+          httpGet: # Uses an HTTP GET request.
+            path: / # The path to check.
+            port: 8080 # The port to check.
+          initialDelaySeconds: 5 # Wait 5 seconds after the container starts before checking.
+          periodSeconds: 10 # Check every 10 seconds.
+        env: # Environment variables to set in the container.
+        - name: POD_NAME # Example environment variable.
+          valueFrom: # Get the value from a field.
+            fieldRef: # Reference to a Pod field.
+              fieldPath: metadata.name # The Pod's name.
+        volumeMounts: # Mounts volumes into the container. (If needed)
+        - name: my-volume # Name of the volume to mount.
+          mountPath: /data # Path inside the container where the volume is mounted.
+      volumes: # Define volumes used by the Pod. (If needed)
+      - name: my-volume # Name of the volume.
+        emptyDir: {} # Type of volume (emptyDir, hostPath, PersistentVolumeClaim, etc.).  emptyDir is ephemeral.
