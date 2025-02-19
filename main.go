@@ -1,66 +1,20 @@
 package main
 
-import (
-	"fmt"
-	"io/ioutil"
-	"log"
-	"os"
-)
+import "fmt"
+
+// create a function that take string as an input, and return it the revese string
+func reverseString(s string) string {
+	// create a variable that can store this value
+	reverse := ""
+	// start the loop from end
+	for i := len(s) - 1; i >= 0; i-- {
+		// store the loop value of each index into the value
+		reverse += string(s[i])
+	}
+	// return the stored valued in the funcion
+	return reverse
+}
 
 func main() {
-	// fileName:="test.txt"
-	// file, err:=os.OpenFile(fileName, os.O_CREATE| os.O_WRONLY, 0644)
-	// if err !=nil{
-	// 	fmt.Println("Error opening file:", err)
-	// 	return
-	// }
-	// defer file.Close()
-	// b:=[]byte("Hello test of write to file")
-	// n, err:=file.Write(b)
-	// if err !=nil{
-	// 	log.Fatal(err)
-	// }
-	// fmt.Printf("Number of bytes written in file is: %d\n", n)
-	// if err !=nil{
-	// 	log.Fatal(err)
-	// }
-
-	// fileName := "test.txt"
-	// file, err := os.OpenFile(fileName, os.O_CREATE|os.O_WRONLY, 0644)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// defer file.Close()
-	// _, err=file.WriteString("Hello, Namaste of workld!")
-	// if err !=nil{
-	// 	log.Fatal(err)
-	// }
-	// fmt.Println("Done writting into file")
-
-	// fileName:="test.txt"
-	// data:="Hi everyone! What about your work!"
-	//  err:=ioutil.WriteFile(fileName, []byte(data), 0 )
-	//  if err !=nil{
-	//     log.Fatal(err)
-	//  }
-	//  fmt.Println("Done!")
-	// fileName:="test.txt"
-	// file, err:=ioutil.ReadFile(fileName)
-	// if err !=nil{
-	// 	log.Fatal(err)
-	// }
-	// fmt.Println(string(file))
-
-	file, err := os.Open("test.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer file.Close()
-
-	content, err := ioutil.ReadFile("test.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("%s",content)
-
+	fmt.Println(reverseString("yung"))
 }
