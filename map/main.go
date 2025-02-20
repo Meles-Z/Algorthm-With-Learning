@@ -92,5 +92,5 @@
 package main
 
 func main() {
-	
+
 }
