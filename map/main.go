@@ -46,45 +46,51 @@
 // 	// }
 // }
 
+// package main
+
+// import "fmt"
+
+// // create test
+// type Test struct {
+// 	Name  string
+// 	Email string
+// 	Age   int
+// }
+
+// // search functionality
+// func SearchForTest(test map[string]Test, name string) (Test, bool) {
+// 	for key, value := range test {
+// 		if key == name {
+// 			return value, true
+// 		}
+// 	}
+// 	return Test{}, false
+// }
+// func main() {
+// 	var name string
+// 	fmt.Print("Enter the name you want to search: ")
+// 	fmt.Scan(&name)
+// 	test := map[string]Test{
+// 		"john": {
+// 			Name:  "John Ripper",
+// 			Email: "john@gmail.com",
+// 			Age:   23,
+// 		},
+// 		"lora": {
+// 			Name:  "Lora Venus",
+// 			Email: "lora.venus@gmail.com",
+// 			Age:   45,
+// 		},
+// 	}
+// 	if result, found := SearchForTest(test, name); found {
+// 		fmt.Println(result)
+// 	}else{
+// 		fmt.Println("nothing value with this name")
+// 	}
+// }
+
 package main
 
-import "fmt"
-
-// create test
-type Test struct {
-	Name  string
-	Email string
-	Age   int
-}
-
-// search functionality
-func SearchForTest(test map[string]Test, name string) (Test, bool) {
-	for key, value := range test {
-		if key == name {
-			return value, true
-		}
-	}
-	return Test{}, false
-}
 func main() {
-	var name string
-	fmt.Print("Enter the name you want to search: ")
-	fmt.Scan(&name)
-	test := map[string]Test{
-		"john": {
-			Name:  "John Ripper",
-			Email: "john@gmail.com",
-			Age:   23,
-		},
-		"lora": {
-			Name:  "Lora Venus",
-			Email: "lora.venus@gmail.com",
-			Age:   45,
-		},
-	}
-	if result, found := SearchForTest(test, name); found {
-		fmt.Println(result)
-	}else{
-		fmt.Println("nothing value with this name")
-	}
+	
 }
