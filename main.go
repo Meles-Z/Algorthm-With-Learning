@@ -15,6 +15,9 @@ func reverseString(s string) string {
 	return reverse
 }
 
+// knapsack algorithm
+
+
 func main() {
 	fmt.Println(reverseString("yung"))
 }
