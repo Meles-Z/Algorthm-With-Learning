@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  namespace: network-policy
+  labels:
+    app: frontend
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+  namespace: network-policy
+  labels:
+    app: client
+spec:
+  containers:
+  - name: busybox
+    image: busybox:latest
+    command:
+      - sleep
+      - "3600"
