@@ -1,0 +1,42 @@
+syntax="proto3";
+
+package rides;
+
+import "google/protobuf/timestamp.proto";
+option go_package="github.com/meles-z/algorithm/grpc/app";
+message Location{
+    double lat=1;
+    double lng=2;
+}
+
+enum RideType{
+    UNSET=0;
+    Regular=1;
+    Pool=2;
+}
+
+message Ride {
+    string id =1;
+    string driver_id=2;
+    Location location=3;
+    repeated string passenger_ids=4;
+    google.protobuf.Timestamp time=5;
+    RideType type=6;
+}
+
+message StartRequest {
+    string id =1;
+    string driver_id=2;
+    Location location=3;
+    repeated string passenger_ids=4;
+    google.protobuf.Timestamp time=5;
+    RideType type=6;
+}
+
+message StartResponse{
+    string id=1;
+}
+
+service Rides{
+    rpc Start(StartRequest) returns (StartResponse){}
+}
