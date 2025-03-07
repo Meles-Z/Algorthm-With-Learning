@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: development-api
+  labels:
+    environment: development
+    app: api
+    team: backend
+  annotations:
+    description: "Development namespace of test local app"
