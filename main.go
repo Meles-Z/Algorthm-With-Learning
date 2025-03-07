@@ -19,6 +19,7 @@ func increment(n int) {
 }
 
 func square(n int) {
+	
 	fmt.Printf("The squeared value is:%d", n*n)
 }
 
