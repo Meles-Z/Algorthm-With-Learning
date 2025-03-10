@@ -7,7 +7,7 @@ func maxProduct(nums []int) int {
 	if len(nums) == 1 {
 		result = nums[0]
 	}
-	for i := 0; i < len(nums)-1; i++ {
+	for i, _ := range nums {
 		if nums[i] > result {
 			result = nums[i]
 		}
