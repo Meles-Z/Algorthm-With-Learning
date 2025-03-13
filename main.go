@@ -40,32 +40,51 @@
 // 	fmt.Println(inc)
 // }
 
+// package main
+
+// import "fmt"
+
+// func lengthOfLongestSubstring(s string) int {
+// 	// Map to store the last seen index of characters
+// 	lastSeen := make(map[rune]int)
+// 	start, maxLen := 0, 0
+
+// 	for i, char := range s {
+// 		// If the character is found in the map and is within the current window
+// 		if lastIdx, found := lastSeen[char]; found && lastIdx >= start {
+// 			start = lastIdx + 1
+// 		}
+// 		lastSeen[char] = i // Update last seen index
+// 		currentLen := i - start + 1
+// 		if currentLen > maxLen {
+// 			maxLen = currentLen
+// 		}
+// 	}
+
+// 	return maxLen
+// }
+
+// func main() {
+// 	fmt.Println(lengthOfLongestSubstring("abcabcbb")) // Output: 3
+// 	fmt.Println(lengthOfLongestSubstring("bbbbb"))    // Output: 1
+// 	fmt.Println(lengthOfLongestSubstring("pwwkew"))   // Output: 3
+// }
+
 package main
 
 import "fmt"
 
-func lengthOfLongestSubstring(s string) int {
-	// Map to store the last seen index of characters
-	lastSeen := make(map[rune]int)
-	start, maxLen := 0, 0
-
-	for i, char := range s {
-		// If the character is found in the map and is within the current window
-		if lastIdx, found := lastSeen[char]; found && lastIdx >= start {
-			start = lastIdx + 1
+func maxValue(nums []int) int {
+	fmt.Println(nums)
+	max := nums[0]
+	for i, _ := range nums[1:] {
+		if nums[i+1] > max {
+			max = nums[i+1]
 		}
-		lastSeen[char] = i // Update last seen index
-		currentLen := i - start + 1
-		if currentLen > maxLen {
-			maxLen = currentLen
-		}
+		fmt.Println(nums[i+1])
 	}
-
-	return maxLen
+	return max
 }
-
 func main() {
-	fmt.Println(lengthOfLongestSubstring("abcabcbb")) // Output: 3
-	fmt.Println(lengthOfLongestSubstring("bbbbb"))    // Output: 1
-	fmt.Println(lengthOfLongestSubstring("pwwkew"))   // Output: 3
+	fmt.Println(maxValue([]int{2, 3, 10, 4, 4, 5, 6}))
 }
