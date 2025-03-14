@@ -56,13 +56,13 @@ func (m *Math) Mode(nums []int) []int {
 func (m *Math) Range(nums []int) int {
 	max := nums[0]
 	min := nums[0]
-	for i := range nums {
-		if nums[i] > max {
-			max = nums[i]
+	for _, num := range nums[1:] {
+		if num > max {
+			max = num
 		}
 
-		if nums[i] < min {
-			min = nums[i]
+		if num < min {
+			min = num
 		}
 	}
 	return max - min
