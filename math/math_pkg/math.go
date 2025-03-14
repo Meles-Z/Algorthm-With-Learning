@@ -1,6 +1,7 @@
 package mymath
 
 import (
+	"fmt"
 	"sort"
 )
 
@@ -87,4 +88,34 @@ func (m *Math) Min(nums []int) (int, error) {
 		}
 	}
 	return min, nil
+}
+
+func (m *Math)SquareRoot(n int) (float64, error) {
+	if n < 0 {
+		return 0, fmt.Errorf("square root of a negative number is undefined")
+	}
+
+	if n == 0 || n == 1 {
+		return float64(n), nil
+	}
+
+	// Convert `int` to `float64` for calculation
+	x := float64(n)
+	tolerance := 1e-7 // Precision
+
+	for {
+		nextX := 0.5 * (x + float64(n)/x) // Newton-Raphson formula
+
+		// Check convergence manually (abs without math package)
+		diff := nextX - x
+		if diff < 0 {
+			diff = -diff
+		}
+
+		if diff < tolerance {
+			return nextX, nil
+		}
+
+		x = nextX
+	}
 }

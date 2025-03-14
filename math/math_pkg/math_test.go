@@ -1,6 +1,7 @@
 package mymath
 
 import (
+	"math"
 	"reflect"
 	"testing"
 )
@@ -46,5 +47,11 @@ func TestMean(t *testing.T) {
 	wantMin := 2
 	if err != nil || gotMin != wantMin {
 		t.Errorf("got %d, want %d", gotMin, wantMin)
+	}
+	sqrt, err := m.SquareRoot(10)
+	wantSqrt := 3.162278
+	epsilon := 1e-6
+	if err != nil || math.Abs(sqrt-wantSqrt) > epsilon {
+		t.Errorf("got %f, want %f", sqrt, wantSqrt)
 	}
 }
