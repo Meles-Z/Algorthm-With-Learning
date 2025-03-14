@@ -90,7 +90,7 @@ func (m *Math) Min(nums []int) (int, error) {
 	return min, nil
 }
 
-func (m *Math)SquareRoot(n int) (float64, error) {
+func (m *Math) SquareRoot(n int) (float64, error) {
 	if n < 0 {
 		return 0, fmt.Errorf("square root of a negative number is undefined")
 	}
@@ -118,4 +118,16 @@ func (m *Math)SquareRoot(n int) (float64, error) {
 
 		x = nextX
 	}
+}
+
+func (m *Math) Power(n int, exp int) int {
+	// 2^3= 2*2*2
+	val := 1
+	if exp == 0 {
+		return 1
+	}
+	for i := 0; i < exp; i++ {
+		val *= n
+	}
+	return val
 }

@@ -54,4 +54,10 @@ func TestMean(t *testing.T) {
 	if err != nil || math.Abs(sqrt-wantSqrt) > epsilon {
 		t.Errorf("got %f, want %f", sqrt, wantSqrt)
 	}
+
+	gotExp := m.Power(2, 3)
+	wantExp := 8
+	if gotExp != wantExp {
+		t.Errorf("\n Errors: got:%d want:%d", gotExp, wantExp)
+	}
 }
