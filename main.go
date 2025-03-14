@@ -75,13 +75,11 @@ package main
 import "fmt"
 
 func maxValue(nums []int) int {
-	fmt.Println(nums)
 	max := nums[0]
-	for i, _ := range nums[1:] {
+	for i := range nums[1:] {
 		if nums[i+1] > max {
 			max = nums[i+1]
 		}
-		fmt.Println(nums[i+1])
 	}
 	return max
 }
