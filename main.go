@@ -83,6 +83,10 @@ func maxValue(nums []int) int {
 	}
 	return max
 }
+
+func Sodeku(nums []int) int{
+	for i:=
+}
 func main() {
 	fmt.Println(maxValue([]int{2, 3, 10, 4, 4, 5, 6}))
 }

@@ -32,6 +32,10 @@ package main
 
 import (
 	"context"
+	"fmt"
+	"io"
+	"net/http"
+	"time"
 )
 
 func execute(ctx context.Context, fn func() int) (int, error) {
@@ -47,6 +51,51 @@ func execute(ctx context.Context, fn func() int) (int, error) {
 		return 0, ctx.Err()
 	}
 }
-func main() {
 
+func Webscrap(ctx context.Context, url string, result chan<- string) {
+	client := http.Client{}
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		result <- fmt.Sprintf("Error happened on %s: %s", url, err)
+		return
+	}
+
+	res, err := client.Do(req)
+	if err != nil {
+		result <- fmt.Sprintf("Error happened on %s: %s", url, err)
+		return
+	}
+	defer res.Body.Close()
+
+	// Check HTTP status code
+	if res.StatusCode != http.StatusOK {
+		result <- fmt.Sprintf("Failed to fetch %s: Status %d", url, res.StatusCode)
+		return
+	}
+
+	body, err := io.ReadAll(res.Body)
+	if err != nil {
+		result <- fmt.Sprintf("Unreadable response body from %s: %s", url, err)
+		return
+	}
+
+	result <- fmt.Sprintf("Result from %s:\n%s", url, string(body))
+}
+func main() {
+	urls := []string{
+		"https://google.com",
+		"https://amazon.com",
+		"https://example.com",
+	}
+	ch := make(chan string, len(urls))
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*2)
+	defer cancel()
+	for _, url := range urls {
+		go Webscrap(ctx, url, ch)
+	}
+
+	for range urls {
+		fmt.Println(<-ch)
+	}
+	close(ch)
 }
