@@ -35,6 +35,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"sync"
 	"time"
 )
 
@@ -52,50 +53,75 @@ func execute(ctx context.Context, fn func() int) (int, error) {
 	}
 }
 
-func Webscrap(ctx context.Context, url string, result chan<- string) {
-	client := http.Client{}
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+func Webscrap(ctx context.Context, url string, result chan<- string, wg *sync.WaitGroup) {
+	defer wg.Done() // Ensure WaitGroup counter is decremented
+
+	// Create an HTTP client with timeout
+	client := &http.Client{}
+
+	// Create request with context
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
 	if err != nil {
-		result <- fmt.Sprintf("Error happened on %s: %s", url, err)
+		result <- fmt.Sprintf("Error creating request for %s: %s", url, err)
 		return
 	}
 
+	// Perform the HTTP request
 	res, err := client.Do(req)
 	if err != nil {
-		result <- fmt.Sprintf("Error happened on %s: %s", url, err)
+		result <- fmt.Sprintf("Error fetching %s: %s", url, err)
 		return
 	}
 	defer res.Body.Close()
 
-	// Check HTTP status code
+	// Check HTTP response status
 	if res.StatusCode != http.StatusOK {
 		result <- fmt.Sprintf("Failed to fetch %s: Status %d", url, res.StatusCode)
 		return
 	}
 
+	// Read response body
 	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		result <- fmt.Sprintf("Unreadable response body from %s: %s", url, err)
 		return
 	}
 
-	result <- fmt.Sprintf("Result from %s:\n%s", url, string(body))
+	// Send successful result
+	result <- fmt.Sprintf("Success from %s:\n%s", url, string(body))
 }
 func main() {
+	// List of URLs to scrape
 	urls := []string{
 		"https://google.com",
 		"https://amazon.com",
 		"https://example.com",
 	}
+
+	// Create a buffered channel with the same capacity as the number of URLs
 	ch := make(chan string, len(urls))
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second*2)
+
+	// Create WaitGroup to track goroutines
+	var wg sync.WaitGroup
+
+	// Define a timeout context (e.g., 5 seconds)
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
+
+	// Launch goroutines for each URL
 	for _, url := range urls {
-		go Webscrap(ctx, url, ch)
+		wg.Add(1)
+		go Webscrap(ctx, url, ch, &wg)
 	}
 
-	for range urls {
-		fmt.Println(<-ch)
+	// Wait for all goroutines to finish in a separate goroutine
+	go func() {
+		wg.Wait()
+		close(ch) // Close the channel after all requests are done
+	}()
+
+	// Read from the channel until it's closed
+	for result := range ch {
+		fmt.Println(result)
 	}
-	close(ch)
 }
