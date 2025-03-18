@@ -29,25 +29,11 @@ func trianglePattern(n int) {
 }
 
 func isLuhan(nums int) bool {
-	num := sumOfDigit(nums)
-	if num/10 != 0 {
-		return false
-	}
-	return true
+	num := doubleNumbers(nums)
+	fmt.Println("Sum:", num)
+	return num/10 == 0
 }
-func sumOfDigit(n int) int {
-	store := []int{}
-	for n != 0 {
-		singleNumber := n % 10
-		store = append(store, singleNumber)
-		n /= 10
-	}
-	sum := doubleNumbers(n)
-	for _, v := range store {
-		sum += v
-	}
-	return sum
-}
+
 func doubleNumbers(n int) int {
 	double := n * 2
 	sum := 0
@@ -56,12 +42,13 @@ func doubleNumbers(n int) int {
 	} else {
 		sum = double
 	}
+	fmt.Println("doubled number:", double)
 	return sum
 }
 
 func main() {
 	// decreasePattern(5)
 	// trianglePattern(4)
-	fmt.Println(doubleNumbers(22))
-	fmt.Println(isLuhan(345))
+	fmt.Println(doubleNumbers(349))
+	fmt.Println(isLuhan(349))
 }
