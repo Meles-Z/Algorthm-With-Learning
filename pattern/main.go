@@ -77,18 +77,48 @@ func diamondShape(rows int) {
 			fmt.Println()
 		}
 	}
-	for k := rows-1; k > 1; k-- {
+	for k := rows - 1; k > 1; k-- {
 		if k%2 == 0 {
-			space := (rows - k)/2
+			space := (rows - k) / 2
 			for s := 0; s < space; s++ {
 				fmt.Print(" ")
 			}
-			for j := 0; j <k; j++ {
+			for j := 0; j < k; j++ {
 				fmt.Print("#")
 			}
 			fmt.Println()
 		}
 	}
+}
+
+func crusedDimoamen(rows int) {
+	for i := 0; i <= rows; i++ {
+		for s := 0; s <= i; s++ {
+			fmt.Print(" ")
+		}
+		for j := 0; j < i; j++ {
+			fmt.Print("#")
+		}
+
+		fmt.Print()
+		for j := 0; j < i; j++ {
+			fmt.Print("#")
+		}
+		
+		fmt.Println()
+	}
+	fmt.Print()
+	for i := 1; i <= rows; i++ {
+		for s := 0; s < rows-i; s++ {
+			fmt.Print(" ")
+		}
+		for j := 0; j < i; j++ {
+			fmt.Print("#")
+		}
+		fmt.Println()
+	}
+
+	
 }
 func main() {
 	// decreasePattern(5)
@@ -96,5 +126,6 @@ func main() {
 	// fmt.Println(doubleNumbers(349))
 	// fmt.Println(isLuhan(349))
 	// centeredHash(8)
-	diamondShape(10)
+	// diamondShape(10)
+	crusedDimoamen(3)
 }

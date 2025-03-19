@@ -81,24 +81,55 @@ func main() {
 	// start with what you know
 	// optimize what you did
 
-	var num int
-	var store []int
+	// var num int
+	// var store []int
 
-	for range 10 {
-		fmt.Print("Enter the number:")
-		fmt.Scan(&num)
-		store = append(store, num)
-	}
+	// for range 10 {
+	// 	fmt.Print("Enter the number:")
+	// 	fmt.Scan(&num)
+	// 	store = append(store, num)
+	// }
 
-	var t string
-	fmt.Print("Do you want possitive or negative number (p/n) ?")
-	fmt.Scan(&t)
-	if t == "p" && num > 0 {
-		fmt.Println(store)
-	} else if t == "n" && num < 10 {
-		fmt.Printf("%d\n", store)
-	} else {
+	// var t string
+	// fmt.Print("Do you want possitive or negative number (p/n) ?")
+	// fmt.Scan(&t)
+	// if t == "p" && num > 0 {
+	// 	fmt.Println(store)
+	// } else if t == "n" && num < 10 {
+	// 	fmt.Printf("%d\n", store)
+	// } else {
 
-		fmt.Println("Invalid input")
+	// 	fmt.Println("Invalid input")
+	// }
+
+	// for i:=1; i<5; i++{
+	// 	for j:=0; j<i; j++{
+	// 		fmt.Print("* ")
+	// 	}
+	// 	fmt.Println()
+	// }
+
+	// for i:=4; i>0; i--{
+	// 	for j:=1; j<i; j++{
+	// 		fmt.Print("* ")
+	// 	}
+	// 	fmt.Println()
+	// }
+
+	// start with what you know
+	rows := 8
+	// maxWidth := rows
+	for i := rows; i > 1; i-- {
+		if i%2 == 0 {
+			space := (rows - i)/2
+			for s := 0; s < space; s++ {
+				fmt.Print(" ")
+			}
+			for j := 0; j < i; j++ {
+				fmt.Print("#")
+			}
+
+			fmt.Println()
+		}
 	}
 }
