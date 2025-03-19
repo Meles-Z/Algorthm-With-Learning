@@ -74,21 +74,31 @@ package main
 
 import "fmt"
 
-func maxValue(nums []int) int {
-	max := nums[0]
-	for i := range nums[1:] {
-		if nums[i+1] > max {
-			max = nums[i+1]
-		}
-	}
-	return max
-}
-
-var lorem int =3
-func init(){
-	lorem=5
-}
 func main() {
-	// fmt.Println(maxValue([]int{2, 3, 10, 4, 4, 5, 6}))
-	fmt.Println(lorem)
+	// your goal
+	// restate problem clearly
+	// devide problem
+	// start with what you know
+	// optimize what you did
+
+	var num int
+	var store []int
+
+	for range 10 {
+		fmt.Print("Enter the number:")
+		fmt.Scan(&num)
+		store = append(store, num)
+	}
+
+	var t string
+	fmt.Print("Do you want possitive or negative number (p/n) ?")
+	fmt.Scan(&t)
+	if t == "p" && num > 0 {
+		fmt.Println(store)
+	} else if t == "n" && num < 10 {
+		fmt.Printf("%d\n", store)
+	} else {
+
+		fmt.Println("Invalid input")
+	}
 }
