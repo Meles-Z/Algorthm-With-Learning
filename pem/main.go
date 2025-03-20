@@ -1,23 +1,24 @@
 package main
 
 import (
+	"bytes"
 	"encoding/pem"
 	"fmt"
 )
 
 func main() {
-	// block := &pem.Block{
-	// 	Type:  "Meles Block",
-	// 	Bytes: []byte("this is exmaple of encoded data."),
-	// }
+	block := &pem.Block{
+		Type:  "Meles Block",
+		Bytes: []byte("this is exmaple of encoded data."),
+	}
 
-	// var buf bytes.Buffer
+	var buf bytes.Buffer
 
-	// err := pem.Encode(&buf, block)
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// fmt.Println(buf.String())
+	err := pem.Encode(&buf, block)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(buf.String())
 
 	data := []byte(`-----BEGIN Meles Block-----
 dGhpcyBpcyBleG1hcGxlIG9mIGVuY29kZWQgZGF0YS4=
