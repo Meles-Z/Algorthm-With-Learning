@@ -31,3 +31,59 @@ func main() {
 		fmt.Println("No numbers matched your selection.")
 	}
 }
+
+/*
+
+payment-gateway/
+├── cmd/           // Executable applications (microservices)
+│   ├── api/       // API service
+│   │   └── main.go
+│   ├── worker/    // Background worker service (event processing)
+│   │   └── main.go
+│   └── ...        // Other microservices (e.g., fraud detection, reporting)
+├── internal/      // Internal application code (Clean Architecture)
+│   ├── domain/    // Core business logic (entities, use cases, interfaces)
+│   │   ├── payment/
+│   │   │   ├── entity.go
+│   │   │   ├── usecase.go
+│   │   │   └── repository.go
+│   │   ├── user/
+│   │   │   ├── entity.go
+│   │   │   ├── usecase.go
+│   │   │   └── repository.go
+│   │   └── ...    // Other domain models
+│   ├── app/       // Application layer (adapters, services)
+│   │   ├── payment/
+│   │   │   ├── service.go // payment processing service
+│   │   │   └── handler.go // api handlers for payment
+│   │   ├── user/
+│   │   │   ├── service.go
+│   │   │   └── handler.go
+│   │   └── ...    // Other application services
+│   ├── infrastructure/ // Infrastructure layer (databases, APIs, message queues)
+│   │   ├── database/
+│   │   │   └── postgres/
+│   │   │       └── payment_repository.go
+│   │   ├── messagequeue/
+│   │   │   └── kafka/
+│   │   │       └── event_publisher.go
+│   │   │       └── event_consumer.go
+│   │   ├── paymentprovider/ // Adapters for payment processors
+│   │   │   ├── stripe/
+│   │   │   │   └── stripe_adapter.go
+│   │   │   ├── paypal/
+│   │   │   │   └── paypal_adapter.go
+│   │   │   └── ...
+│   │   ├── api/
+│   │   │   └── http/
+│   │   │       └── router.go
+│   │   └── ...    // Other infrastructure implementations
+├── pkg/           // Reusable libraries (optional)
+│   └── ...
+├── configs/       // Configuration files
+│   └── config.yaml
+├── go.mod
+├── go.sum
+└── ...
+
+*/

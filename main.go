@@ -143,11 +143,13 @@ func main() {
 	// }
 
 	rows := []int{100, 50, 4, 80, 60}
-	greaterValue := rows[0]
-	for i := 1; i < len(rows); i++ {
-		if rows[i]>greaterValue{
-			greaterValue = rows[i]
-		}
-	}
-	fmt.Println(greaterValue)
+	// greaterValue := rows[0]
+	// for i := 1; i < len(rows); i++ {
+	// 	if rows[i]>greaterValue{
+	// 		greaterValue = rows[i]
+	// 	}
+	// }
+	// fmt.Println(greaterValue)
+
+	
 }
