@@ -117,19 +117,37 @@ func main() {
 	// }
 
 	// start with what you know
-	rows := 8
-	// maxWidth := rows
-	for i := rows; i > 1; i-- {
-		if i%2 == 0 {
-			space := (rows - i)/2
-			for s := 0; s < space; s++ {
-				fmt.Print(" ")
-			}
-			for j := 0; j < i; j++ {
-				fmt.Print("#")
-			}
+	// rows := 8
+	// // maxWidth := rows
+	// for i := rows; i > 1; i-- {
+	// 	if i%2 == 0 {
+	// 		space := (rows - i)/2
+	// 		for s := 0; s < space; s++ {
+	// 			fmt.Print(" ")
+	// 		}
+	// 		for j := 0; j < i; j++ {
+	// 			fmt.Print("#")
+	// 		}
 
-			fmt.Println()
+	// 		fmt.Println()
+	// 	}
+	// }
+
+	// target := 4
+	// arr := []int{1, 2, 3, 4, 5}
+	// for i, row := range arr {
+	// 	if row == target {
+	// 		fmt.Println("Found at index:", i)
+	// 		break
+	// 	}
+	// }
+
+	rows := []int{100, 50, 4, 80, 60}
+	greaterValue := rows[0]
+	for i := 1; i < len(rows); i++ {
+		if rows[i]>greaterValue{
+			greaterValue = rows[i]
 		}
 	}
+	fmt.Println(greaterValue)
 }
