@@ -151,5 +151,9 @@ func main() {
 	// }
 	// fmt.Println(greaterValue)
 
-	
+	for i:=0; i<len(rows); i++{
+		if i%2!=0{
+			fmt.Println(rows[i])
+		}
+	}
 }
