@@ -6,7 +6,7 @@ metadata:
     app: myapp
     type: dev
 spec:
- replicas: 2
+ replicas: 4
  selector:
    app: myapp
  template:

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-cm
+data:
+  nginx.conf: |
+    # Your nginx configuration goes here
+    server {
+        listen 80;
+        server_name example.com;
+        location / {
+            return 200 'Hello, world!';
+        }
+    }

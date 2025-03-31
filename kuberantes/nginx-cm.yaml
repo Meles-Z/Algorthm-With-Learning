@@ -1,4 +1,4 @@
-[root@controller ~]# cat nginx-cm.yml
+
 apiVersion: v1
 kind: Pod
 metadata:
