@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-test
+  labels:
+    app: backend-test
+spec:
+  containers:
+    - name: nginx-fff
+      image: nginx:latest
+      ports:
+      - containerPort: 8040
