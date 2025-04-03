@@ -9,4 +9,4 @@ spec:
     - name: nginx-fff
       image: nginx:latest
       ports:
-      - containerPort: 8040
+      - containerPort: 8080
